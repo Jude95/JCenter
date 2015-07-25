@@ -7,24 +7,24 @@
 并且给仓库加上`mavenCentral()`
 就像：
 
-  buildscript {
-      repositories {
-          mavenCentral()
-          jcenter()
-      }
-      dependencies {
-          classpath 'com.android.tools.build:gradle:1.2.3'
-          classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
-          classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
-      }
-  }
-  
-  allprojects {
-      repositories {
-          mavenCentral()
-          jcenter()
-      }
-  }
+    buildscript {
+        repositories {
+            mavenCentral()
+            jcenter()
+        }
+        dependencies {
+            classpath 'com.android.tools.build:gradle:1.2.3'
+            classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'
+            classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
+        }
+    }
+    
+    allprojects {
+        repositories {
+            mavenCentral()
+            jcenter()
+        }
+    }
 如果报错请先把gradle版本升到2.4以上
 
 然后在你的moudel的gradle里加上
