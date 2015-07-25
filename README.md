@@ -25,7 +25,7 @@
         }
 如果报错请先把gradle版本升到2.4以上
 
-2. 在moudel的gradle里加上
+2. 在moudel的gradle里最外层加上
 
           ext {
               bintrayRepo = 'maven'////bintray上的仓库名，一般为maven
