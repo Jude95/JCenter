@@ -23,7 +23,6 @@
                 jcenter()
             }
         }
-    
 如果报错请先把gradle版本升到2.4以上
 
 2. 在moudel的gradle里加上
