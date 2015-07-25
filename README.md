@@ -5,7 +5,8 @@
 `classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'`  
 `classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'`  
 并且给仓库加上`mavenCentral()`
-就像
+就像：
+
   buildscript {
       repositories {
           mavenCentral()
