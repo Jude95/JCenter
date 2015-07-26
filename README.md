@@ -62,6 +62,7 @@
 4. 到bintray.com找到你刚上传的包。点`add to Jcenter`。随便填点评论提交。
 
 4. 这些坑不要再跳了  
+
 上面你设置了artifact也并没有什么乱用。Jcenter还是一定会用你moudel的名字作为artifactId的。具体为什么欢迎补充。  
 
 如果依赖不上可以去http://jcenter.bintray.com/找到你的group目录看看具体情况。  
