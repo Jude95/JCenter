@@ -64,6 +64,6 @@
 
 5. 这些坑不要再跳了  
 上面你设置了artifact也并没有什么卵用。Jcenter还是一定会**用你moudel的名字作为artifactId**的。具体为什么欢迎补充。  
-如果依赖不上可以去`http://jcenter.bintray.com/`找到你的group目录看看具体情况。  
-比如：`com.jude:easyrecyclerview:1.0.2`就是`http://jcenter.bintray.com/com/jude/easyrecyclerview/`  
+如果依赖不上可以去http://jcenter.bintray.com找到你的group目录看看具体情况。  
+比如：`com.jude:easyrecyclerview:1.0.2`就是http://jcenter.bintray.com/com/jude/easyrecyclerview   
 **网上常见的上传JCenter的gradle配置无法解决你的库依赖其他库的问题**。务必用我上面的配置。
