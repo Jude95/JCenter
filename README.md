@@ -1,10 +1,17 @@
-# JCenter
-上传Jcenter的gradle配置
+# 库上传JCenter教程
+1.去[Bintray](https://bintray.com/)注册  
+一般使用github登录就好，很方便，最好翻墙上，不然卡死你。  
+然后记录下2个值：  
+name(头像旁的)   
+key  
+![APIKey](http://cdn.saymagic.cn/o_19e91jjrp3iu5mo1p631qjvff9.gif)
 
-1. 在project的gradle里加上  
+
+2. 在Project的gradle里加上  
 `classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.2'`  
 `classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'`  
-并且给仓库加上`mavenCentral()`就像  
+并且给仓库加上`mavenCentral()`  
+就像  
 
         buildscript {
             repositories {
@@ -23,9 +30,10 @@
                 jcenter()
             }
         }
-如果报错请先把gradle版本升到2.4以上
+如果报错请先把gradle版本升到2.4以上。  
+For Future:如果还有报错。保证你的gradle与这3个插件全都是最新。
 
-2. 在moudel的gradle里最外层加上
+3. 在moudel里的gradle里最外层加上
 
           ext {
               bintrayRepo = 'maven'////bintray上的仓库名，一般为maven
@@ -55,15 +63,23 @@
           apply from:'https://raw.githubusercontent.com/Jude95/JCenter/master/install.gradle'
           apply from:'https://raw.githubusercontent.com/Jude95/JCenter/master/bintray.gradle'
 
-3. 在local.properties里加上，这个到bintray.com去注册账号就有：  
+4. 在local.properties里加上(第一步记下的)：  
 `bintray.apikey=********************`  
 `bintray.user=****`  
 
-4. 到bintray.com找到你刚上传的包。点`add to Jcenter`。随便填点评论提交，每天半夜12点半准时审核。  
+5. 打开控制台，输入`gradle bintrayupload`然后坐等SUCCESS。  
+如果找不到gralde命令，确定你把gradle加入了你的环境变量。
+有时候注释里的一些特殊字符会造成编译失败。提示哪句不对就改一下那部分注释吧。  
+
+6. 成功过后到[Bintray](https://bintray.com/)找到你刚上传的包。点`add to Jcenter`。随便填点评论提交，每天半夜12点半准时审核通过(= = 美国时间上班了)。然后你会收到一条通知。  
 然后你的就可以用 `GroupId:ArtifactId:libraryVersion` 来依赖了。
 
-5. 这些坑不要再跳了  
-上面你设置了artifact也并没有什么卵用。Jcenter还是一定会**用你moudel的名字作为artifactId**的。具体为什么欢迎补充。  
-如果依赖不上可以去[http://jcenter.bintray.com](http://jcenter.bintray.com)找到你的group目录看看具体情况。  
+###这些坑不要再跳了  
+1.上面你设置了artifact也并没有什么卵用。Jcenter还是一定会**用你moudel的名字作为artifactId**的。  
+具体原因参考[如何使用Android Studio把自己的Android library分发到jCenter和Maven Central](http://www.devtf.cn/?p=760)。  
+
+2.如果依赖不上可以去[http://jcenter.bintray.com](http://jcenter.bintray.com)找到你的group目录看看你到底上传上去没有。  
 比如：`com.jude:easyrecyclerview:1.0.2`就是http://jcenter.bintray.com/com/jude/easyrecyclerview   
-**网上常见的上传JCenter的gradle配置无法解决你的库依赖其他库的问题**。务必用我上面的配置。
+
+3.**网上常见的上传JCenter的gradle配置无法解决你的库依赖其他库的问题**。务必用我上面的配置。  
+此条详情参考[Android 项目打包到 JCenter 的坑](http://www.jianshu.com/p/c721f9297b2f?utm_campaign=hugo&utm_medium=reader_share&utm_content=note)
