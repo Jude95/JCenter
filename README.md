@@ -34,7 +34,7 @@ key
 如果报错请先把gradle版本升到2.4以上。  
 For Future:如果还有报错。保证你的gradle与这3个插件全都是最新。
 
-3. 在moudel里的gradle里最外层加上
+3. 在要上传的moudel里的gradle里最外层加上
 
           ext {
               bintrayRepo = 'maven'////bintray上的仓库名，一般为maven
@@ -76,7 +76,7 @@ For Future:如果还有报错。保证你的gradle与这3个插件全都是最�
 然后你的就可以用 `GroupId:ArtifactId:libraryVersion` 来依赖了。
 
 ###这些坑不要再跳了  
-1.上面你设置了artifact也并没有什么卵用。Jcenter还是一定会**用你moudel的名字作为artifactId**的。  
+1.上面你设置了artifact也并没有什么卵用。你的meaven仓库里显示是artifact，但Jcenter还是一定会**用你moudel的名字作为artifactId**的。  
 具体原因参考[如何使用Android Studio把自己的Android library分发到jCenter和Maven Central](http://www.devtf.cn/?p=760)。  
 
 2.如果依赖不上可以去[http://jcenter.bintray.com](http://jcenter.bintray.com)找到你的group目录看看你到底上传上去没有。  
