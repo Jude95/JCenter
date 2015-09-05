@@ -1,5 +1,6 @@
 # 库上传JCenter教程
-1.去[Bintray](https://bintray.com/)注册  
+
+1. 去[Bintray](https://bintray.com/)注册  
 一般使用github登录就好，很方便，最好翻墙上，不然卡死你。  
 然后记录下2个值：  
 name(头像旁的)   
