@@ -69,6 +69,7 @@ For Future:如果还有报错。保证你的gradle与这3个插件全都是最�
 `bintray.user=****`  
 
 5. 打开控制台，输入`gradle bintrayupload`然后坐等SUCCESS。  
+![terminal](https://raw.githubusercontent.com/Jude95/JCenter/master/image/terminal.png)
 如果找不到gralde命令，确定你把gradle加入了你的环境变量。
 有时候注释里的一些特殊字符会造成编译失败。提示哪句不对就改一下那部分注释吧。  
 
