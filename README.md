@@ -61,8 +61,8 @@ For Future:如果还有报错。保证你的gradle与这3个插件全都是最�
               licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
               allLicenses = ["Apache-2.0"]
           }
-          apply from:'https://raw.githubusercontent.com/Jude95/JCenter/master/install.gradle'
-          apply from:'https://raw.githubusercontent.com/Jude95/JCenter/master/bintray.gradle'
+          apply from:'https://cdn.rawgit.com/Jude95/JCenter/master/install.gradle'
+          apply from:'https://cdn.rawgit.com/Jude95/JCenter/master/bintray.gradle'
 
 4. 在local.properties里加上(第一步记下的)：  
 `bintray.apikey=********************`  
