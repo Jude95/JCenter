@@ -9,8 +9,8 @@ key
 
 
 2. 在Project的gradle里加上  
-`classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'`  
-`classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'`  
+`classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'`  
+`classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'`  
 并且给仓库加上`mavenCentral()`  
 就像  
 
@@ -20,9 +20,9 @@ key
                 jcenter()
             }
             dependencies {
-                classpath 'com.android.tools.build:gradle:1.5.0'
-                classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
-                classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
+                classpath 'com.android.tools.build:gradle:2.2.0'
+                classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
+                classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
             }
         }
         allprojects {
@@ -31,7 +31,7 @@ key
                 jcenter()
             }
         }
-如果报错请先把gradle版本升到2.4以上。  
+如果报错请先把gradle版本升到2.11以上。  
 For Future:如果还有报错。保证你的gradle与这3个插件全都是最新。
 
 3. 在要上传的moudel里的gradle里最外层加上
