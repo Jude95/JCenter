@@ -1,45 +1,80 @@
 apply plugin: 'com.jfrog.bintray'
 
-version = libraryVersion
+/**
+    package_repo = 'maven' // bintray上的仓库名，一般为maven
+    package_type = 'aar'  // 输出类型
+    package_group = 'com.example' // JCenter的GroupId
+    package_artifact = 'demo' // JCenter的ArtifactId
+    package_version = '1.0'  // JCenter的VersionId
+    package_description = 'A tool for Android'
 
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
+    siteUrl = 'https://github.com/'
+    gitUrl = 'https://github.com/'
+
+    //开发者信息
+    developerId = ''
+    developerName = ''
+    developerEmail = ''
+
+    //开源协议
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+ **/
+
+String defaultValue(key,defaultValue){
+    if(ext.has(key))key
+    else defaultValue
 }
 
-artifacts {
-    archives sourcesJar
-}
+version = package_version
+group = package_group
 
-android.libraryVariants.all { variant ->
-    println variant.javaCompile.classpath.files
-    if(variant.name == 'release') {
-        task("generate${variant.name.capitalize()}Javadoc", type: Javadoc) {
-            // title = ''
-            // description = ''
-            source = variant.javaCompile.source
-            classpath = files(variant.javaCompile.classpath.files, project.android.getBootClasspath())
-            options {
-                encoding "utf-8"
-                links "http://docs.oracle.com/javase/7/docs/api/"
-                linksOffline "http://d.android.com/reference", "${android.sdkDirectory}/docs/reference"
-            }
-            exclude '**/BuildConfig.java'
-            exclude '**/R.java'
-        }
-        task("javadoc${variant.name.capitalize()}Jar", type: Jar, dependsOn: "generate${variant.name.capitalize()}Javadoc") {
-            classifier = 'javadoc'
-            from tasks.getByName("generate${variant.name.capitalize()}Javadoc").destinationDir
-        }
-        artifacts {
-            archives tasks.getByName("javadoc${variant.name.capitalize()}Jar")
-        }
+if (project.getPlugins().findPlugin("com.android.library")){
+    task sourcesJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs
+        classifier = 'sources'
+    }
+
+    task javadoc(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    artifacts {
+        archives sourcesJar
+        archives javadocJar
+    }
+} else {
+    task sourcesJar(type: Jar) {
+        from sourceSets.main.java.srcDirs
+        classifier = 'sources'
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    artifacts {
+        archives sourcesJar
+        archives javadocJar
     }
 }
+
+
 
 // Bintray
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+
+
 
 bintray {
     user = properties.getProperty("bintray.user")
@@ -47,20 +82,59 @@ bintray {
 
     configurations = ['archives']
     pkg {
-        repo = bintrayRepo
-        name = bintrayName
-        desc = libraryDescription
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = allLicenses
+        repo = package_repo
+        name = package_artifact
+        desc = package_description
+        websiteUrl = defaultValue 'siteUrl', ''
+        vcsUrl = defaultValue 'gitUrl', ''
+        licenses = defaultValue 'allLicenses', ''
         publish = true
-        publicDownloadNumbers = true
-        version {
-            desc = libraryDescription
-            gpg {
-                sign = true //Determines whether to GPG sign the files. The default is false
-                passphrase = properties.getProperty("bintray.gpg.password")
-                //Optional. The passphrase for GPG signing'
+    }
+}
+
+apply plugin: 'com.github.dcendents.android-maven'
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                if (!ext.has('package_type')){
+                    if (project.getPlugins().findPlugin("com.android.library")){
+                        packaging 'aar'
+                    }else{
+                        packaging 'jar'
+                    }
+                }else{
+                    packaging package_type
+                }
+                groupId package_group
+                artifactId package_artifact
+
+                // Add your description here
+                name package_artifact
+                description = defaultValue 'package_description', ''
+                url = defaultValue 'siteUrl', ''
+
+                // Set your license
+                licenses {
+                    license {
+                        name = defaultValue 'licenseName', ''
+                        url = defaultValue 'licenseUrl', ''
+                    }
+                }
+                developers {
+                    developer {
+                        id = defaultValue 'developerId', ''
+                        name = defaultValue 'developerName', ''
+                        email = defaultValue 'developerEmail', ''
+                    }
+                }
+                scm {
+                    connection = defaultValue 'gitUrl', ''
+                    developerConnection = defaultValue 'gitUrl', ''
+                    url = defaultValue 'siteUrl', ''
+                }
             }
         }
     }
