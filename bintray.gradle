@@ -89,7 +89,7 @@ bintray {
         desc = package_description
         websiteUrl = defaultValue 'siteUrl', ''
         vcsUrl = defaultValue 'gitUrl', ''
-        licenses = defaultValue 'allLicenses', ''
+        licenses = (defaultValue 'allLicenses', 'Apache-2.0').split(',')
         publish = true
     }
 }
