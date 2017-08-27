@@ -3,7 +3,7 @@ apply plugin: 'com.jfrog.bintray'
 /**
     package_repo = 'maven' // bintray上的仓库名，一般为maven
     package_type = 'aar'  // 输出类型
-    package_userOrg = package_userOrg //组织名
+    package_userOrg = package_userOrg //组织名 不填默认为用户
     package_group = 'com.example' // JCenter的GroupId
     package_artifact = 'demo' // JCenter的ArtifactId
     package_version = '1.0'  // JCenter的VersionId
@@ -20,7 +20,7 @@ apply plugin: 'com.jfrog.bintray'
     //开源协议
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
+    allLicenses = 'Apache-2.0' // 多协议用 , 分割
  **/
 
 String defaultValue(key,defaultValue){
@@ -84,13 +84,13 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = package_repo
-        userOrg = defaultValue 'package_userOrg', ''
+        userOrg = defaultValue 'package_userOrg', null
         name = package_artifact
         desc = package_description
         websiteUrl = defaultValue 'siteUrl', ''
         vcsUrl = defaultValue 'gitUrl', ''
-        licenses = defaultValue 'allLicenses', 'Apache-2.0'
-        licenses = licenses.split(',')
+        def licensesStr = defaultValue 'allLicenses', 'Apache-2.0'
+        licenses = licensesStr.split(',')
         publish = true
     }
 }
