@@ -24,7 +24,7 @@ apply plugin: 'com.jfrog.bintray'
  **/
 
 String defaultValue(key,defaultValue){
-    if(ext.has(key))key
+    if(ext.has(key))ext.get(key) 
     else defaultValue
 }
 
@@ -84,7 +84,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = package_repo
-        userOrg = package_userOrg
+        userOrg = defaultValue 'package_userOrg', ''
         name = package_artifact
         desc = package_description
         websiteUrl = defaultValue 'siteUrl', ''
