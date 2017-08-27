@@ -3,6 +3,7 @@ apply plugin: 'com.jfrog.bintray'
 /**
     package_repo = 'maven' // bintray上的仓库名，一般为maven
     package_type = 'aar'  // 输出类型
+    package_userOrg = package_userOrg //组织名
     package_group = 'com.example' // JCenter的GroupId
     package_artifact = 'demo' // JCenter的ArtifactId
     package_version = '1.0'  // JCenter的VersionId
@@ -83,6 +84,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = package_repo
+        userOrg = package_userOrg
         name = package_artifact
         desc = package_description
         websiteUrl = defaultValue 'siteUrl', ''
@@ -110,7 +112,6 @@ install {
                 }
                 groupId package_group
                 artifactId package_artifact
-
                 // Add your description here
                 name package_artifact
                 description = defaultValue 'package_description', ''

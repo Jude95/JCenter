@@ -9,7 +9,7 @@ key
 
 
 2. 在Project的gradle里加上  
-`classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'`  
+`classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'`  
 `classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'`  
 并且给仓库加上`mavenCentral()`  
 就像  
@@ -58,7 +58,7 @@ For Future:如果还有报错。保证你的gradle与这3个插件全都是最�
               allLicenses = ["Apache-2.0"]
           }
 
-          apply from:'https://cdn.rawgit.com/Jude95/JCenter/v2/bintray.gradle'
+          apply from:'https://raw.githubusercontent.com/Jude95/JCenter/v2/bintray.gradle'
 
 4. 在local.properties里加上(第一步记下的)：  
 `bintray.apikey=********************`  
