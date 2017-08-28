@@ -36,6 +36,7 @@ For Future:如果还有报错。保证你的gradle与这3个插件全都是最�
 3. 在要上传的moudel里的gradle里最外层加上
 
           ext {
+              package_userOrg = 'jinuo' // 组织名 不填默认用户名
               package_repo = 'maven' // bintray上的仓库名，一般为maven
               package_type = 'aar'  // 输出类型
               package_group = 'com.example' // JCenter的GroupId
@@ -43,7 +44,6 @@ For Future:如果还有报错。保证你的gradle与这3个插件全都是最�
               package_version = '1.0'  // JCenter的VersionId
               package_description = 'A tool for Android'
 
-              // 以下选填
               siteUrl = 'https://github.com/'
               gitUrl = 'https://github.com/'
 
@@ -55,7 +55,7 @@ For Future:如果还有报错。保证你的gradle与这3个插件全都是最�
               //开源协议
               licenseName = 'The Apache Software License, Version 2.0'
               licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-              allLicenses = ["Apache-2.0"]
+              allLicenses = 'Apache-2.0'
           }
 
           apply from:'https://raw.githubusercontent.com/Jude95/JCenter/v2/bintray.gradle'
