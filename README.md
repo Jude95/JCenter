@@ -1,6 +1,6 @@
-###  库上传JCenter教程
+#  库上传JCenter教程
 
-1. 去[Bintray](https://bintray.com/)注册 
+## 1. 去[Bintray](https://bintray.com/)注册 
 
 
   然后保存自己的用户名以及API Key,如下图
@@ -9,7 +9,7 @@
 ![APIKey](http://cdn.saymagic.cn/o_19e91jjrp3iu5mo1p631qjvff9.gif)
 
 
-2. 新建仓库
+## 2. 新建仓库
 
 如下图。新建一个仓库，记得仓库类型设置为maven并为其取一个名字
 ![](https://raw.githubusercontent.com/CB2Git/JCenter/v2/image/微信截图_20190403134352.png)
@@ -17,7 +17,8 @@
 ![](https://raw.githubusercontent.com/CB2Git/JCenter/v2/image/微信截图_20190403134631.png)
 
 
-3. 在Project的gradle里加上  
+## 3. 配置Gradle依赖
+在Project的gradle里加上  
 
 ```
 buildscript {
@@ -41,7 +42,8 @@ buildscript {
 
 ​    
 
-4. 在要上传的moudel里的gradle里最外层加上
+## 4. 配置包信息
+在要上传的moudel里的gradle里最外层加上
 
           ext {
               package_userOrg = 'jinuo' //  组织名或者用户名 不填默认用户名
@@ -68,17 +70,20 @@ buildscript {
             
           apply from:'https://raw.githubusercontent.com/Jude95/JCenter/v2/bintray.gradle'
 
-5. 在local.properties里加上(第一步记下的)：  
+## 5. 配置账号信息
+在local.properties里加上(第一步记下的)：  
     `bintray.apikey=********************`  
     `bintray.user=****`  
 
-6. 打开控制台，输入`gradle bintrayupload`然后坐等SUCCESS。  
+## 6. 提交
+打开控制台，输入`gradle bintrayupload`然后坐等SUCCESS。  
     ![terminal](https://raw.githubusercontent.com/Jude95/JCenter/master/image/terminal.png)
     如果找不到gralde命令，确定你把gradle加入了你的环境变量
     或者尝试使用`gradlew bintrayupload`
     有时候注释里的一些特殊字符会造成编译失败。提示哪句不对就改一下那部分注释吧。  
 
-7. 成功过后到[Bintray](https://bintray.com/)找到你刚上传的包。点`add to Jcenter`。随便填点评论提交，每天半夜12点半准时审核通过(= = 美国时间上班了)。然后你会收到一条通知。  
+## 7. 提交Jcenter
+成功过后到[Bintray](https://bintray.com/)找到你刚上传的包。点`add to Jcenter`。随便填点评论提交，每天半夜12点半准时审核通过(= = 美国时间上班了)。然后你会收到一条通知。  
     然后你的就可以用 `GroupId:ArtifactId:libraryVersion` 来依赖了。以后有更新直接重复第5部即可，会自动同步到jcenter仓库。
 
 如果上传后却依赖不了可以去[http://jcenter.bintray.com](http://jcenter.bintray.com)找到你的group目录看看你到底上传上去没有。  
@@ -87,30 +92,22 @@ buildscript {
 
 
 
-异常情况处理:
+## 异常情况处理:
 
-+ 现象
-`Could not get unknown property 'package_version' for project ':mylibrary' of type org.gradle.api.Project.`
-
-解决方案
-
-将`from:'https://raw.githubusercontent.com/Jude95/JCenter/v2/bintray.gradle'`放置到gradle脚本最后一行
-
-+ 现象
-
-gradle 不是内部或外部命令，也不是可运行的程序或批处理文件。
-
-解决方案
-
-查看项目根目录,如果存在gradlew或gradlew.bat，执行`gradlew bintrayupload`
++ **现象**  
+`Could not get unknown property 'package_version' for project ':mylibrary' of type org.gradle.api.Project.`  
+**解决方案**  
+将`from:'https://raw.githubusercontent.com/Jude95/JCenter/v2/bintray.gradle'`放置到gradle脚本最后一行  
 
 
-+ 现象
++ **现象**  
+gradle 不是内部或外部命令，也不是可运行的程序或批处理文件。  
+**解决方案**  
+查看项目根目录,如果存在gradlew或gradlew.bat，执行`gradlew bintrayupload`  
 
- Could not publish '********': HTTP/1.1 404 Not Found [message:Repo 'maven' was not found]
 
-解决方案
-
-在你的账户下面没有name为maven的仓库，参考第二步中在bintray中新建仓库，仓库类型为maven，仓库名为`package_repo = 'maven'`中配置的仓库名
-
-检查是否使用的组织仓库，但是对应的组织不存在对应的仓库
++ **现象**  
+ Could not publish '********': HTTP/1.1 404 Not Found [message:Repo 'maven' was not found]  
+**解决方案**  
+在你的账户下面没有name为maven的仓库，参考第二步中在bintray中新建仓库，仓库类型为maven，仓库名为`package_repo = 'maven'`中配置的仓库名  
+检查是否使用的组织仓库，但是对应的组织不存在对应的仓库  
