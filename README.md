@@ -12,36 +12,34 @@
 2. 新建仓库
 
 如下图。新建一个仓库，记得仓库类型设置为maven并为其取一个名字
-![](image\微信截图_20190403134352.png)
+![](https://raw.githubusercontent.com/CB2Git/JCenter/v2/image/微信截图_20190403134352.png)
 
-![](image\微信截图_20190403134631.png)
+![](https://raw.githubusercontent.com/CB2Git/JCenter/v2/image/微信截图_20190403134631.png)
 
 
 3. 在Project的gradle里加上  
-    `classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'`  
-    `classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'`  
-    并且给仓库加上`mavenCentral()`  
-    就像  
 
-       buildscript {
-           repositories {
-               mavenCentral()
-               jcenter()
-           }
-           dependencies {
-               classpath 'com.android.tools.build:gradle:2.2.0'
-               classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
-               classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-           }
-       }
-       allprojects {
-           repositories {
-               jcenter()
-           }
-       }
-    如果报错请到 [https://github.com/dcendents/android-maven-gradle-plugin](https://github.com/dcendents/android-maven-gradle-plugin)查看gradle对应的android-maven-gradle-plugin插件版本
+```
+buildscript {
+    repositories {
+        mavenCentral()
+        google()
+        jcenter()
+        
+    }
+    dependencies {
+    	//gradle版本要与android-maven-gradle-plugin匹配
+        classpath 'com.android.tools.build:gradle:3.3.2'
 
-    
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+    }
+}
+```
+如果报错请到 [https://github.com/dcendents/android-maven-gradle-plugin](https://github.com/dcendents/android-maven-gradle-plugin)查看gradle对应的android-maven-gradle-plugin插件版本
+
+
+​    
 
 4. 在要上传的moudel里的gradle里最外层加上
 
